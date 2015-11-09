@@ -1,0 +1,85 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
+    tools:context=".MainActivity"
+    android:background="#ff6eb6ff"
+    android:onClick="startActivitySalvamento">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="DESLOCAMENTO"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#ffffffff"
+        android:textSize="@dimen/abc_text_size_display_1_material" />
+
+    <TextView
+        android:id="@+id/textViewPosx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textViewPosy"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="44dp"
+        android:layout_marginLeft="35dp"
+        android:text="TextView"
+        android:textColor="#ffffffff" />
+
+    <TextView
+        android:id="@+id/textViewPosy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewPosx"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="110dp"
+        android:text="TextView"
+        android:textColor="#ffffffff" />
+
+    <TextView
+        android:id="@+id/textViewPosz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewPosy"
+        android:layout_below="@+id/textViewPosx"
+        android:layout_marginTop="26dp"
+        android:text="TextView"
+        android:textColor="#ffffffff" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/button1"
+        android:layout_marginBottom="70dp"
+        android:onClick="onClickSalvar"
+        android:text="Salvar Deslocamento" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        android:onClick="onClickGravar"
+        android:text="Gravar Deslocamento" />
+
+    <TextView
+        android:id="@+id/estado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="39dp"
+        android:text="Estado" />
+
+</RelativeLayout>

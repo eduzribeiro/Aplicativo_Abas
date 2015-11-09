@@ -1,0 +1,85 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
+    tools:context=".MainActivity"
+    android:background="#ff6eb6ff"
+    android:onClick="startActivityDeslocamento">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="VELOCIDADE"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#ffffffff"
+        android:textSize="@dimen/abc_text_size_display_1_material" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/button1"
+        android:layout_alignBottom="@+id/button1"
+        android:layout_alignRight="@+id/textView"
+        android:onClick="onClickSalvar"
+        android:text="Salvar Vel" />
+
+    <TextView
+        android:id="@+id/textViewPosx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textViewPosy"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="44dp"
+        android:layout_marginLeft="35dp"
+        android:text="TextView"
+        android:textColor="#ffffffff" />
+
+    <TextView
+        android:id="@+id/textViewPosy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewPosx"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="110dp"
+        android:text="TextView"
+        android:textColor="#ffffffff" />
+
+    <TextView
+        android:id="@+id/textViewPosz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewPosy"
+        android:layout_below="@+id/textViewPosx"
+        android:layout_marginTop="26dp"
+        android:text="TextView"
+        android:textColor="#ffffffff" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewPosz"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="68dp"
+        android:onClick="onClickGravar"
+        android:text="Gravar Vel" />
+
+    <TextView
+        android:id="@+id/estado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="22dp"
+        android:text="Estado" />
+
+</RelativeLayout>

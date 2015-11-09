@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.acelerometro_m_testeabas"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="21" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".TesteAbasActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ActivityVelocidade"
+            android:label="@string/title_activity_activity_velocidade"
+            android:parentActivityName=".TesteAbasActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.acelerometro_m_testeabas.TesteAbasActivity" />
+        </activity>
+        <activity
+            android:name=".ActivityDeslocamento"
+            android:label="@string/title_activity_activity_deslocamento"
+            android:parentActivityName=".TesteAbasActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.acelerometro_m_testeabas.TesteAbasActivity" />
+        </activity>
+        <activity
+            android:name=".ActivitySalvarDados"
+            android:label="@string/title_activity_activity_salvar_dados"
+            android:parentActivityName=".TesteAbasActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.acelerometro_m_testeabas.TesteAbasActivity" />
+        </activity>
+        <activity
+            android:name=".ActivityConfiguracao"
+            android:label="@string/title_activity_activity_configuracao"
+            android:parentActivityName=".TesteAbasActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.acelerometro_m_testeabas.TesteAbasActivity" />
+        </activity>
+    </application>
+
+</manifest>

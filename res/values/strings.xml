@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Acelerometro_M_TesteAbas</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_activity_velocidade">Velocidade</string>
+    <string name="title_activity_activity_deslocamento">ActivityDeslocamento</string>
+    <string name="title_activity_activity_salvar_dados">Salvar_Dados</string>
+    <string name="title_activity_activity_configuracao">Configuração</string>
+
+</resources>
