@@ -1,0 +1,169 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
+    tools:context=".MainActivity"
+    android:background="#ff6eb6ff"
+   >
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="ACELERAÇÕES"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#ffffffff"
+        android:textSize="@dimen/abc_text_size_display_1_material" />
+    	
+    <TextView
+        android:id="@+id/textViewAccX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/estado"
+        android:layout_below="@+id/estado"
+        android:layout_marginTop="16dp"
+        android:textColor="#ffffffff"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textViewAccZ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewAccY"
+        android:layout_below="@+id/textViewAccY"
+        android:layout_marginTop="20dp"
+        android:textColor="#ffffffff"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textViewAccY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewAccX"
+        android:layout_below="@+id/textViewAccX"
+        android:layout_marginTop="20dp"
+        android:text="TextView"
+        android:textColor="#ffffffff" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button1"
+        android:layout_alignRight="@+id/textView3"
+        android:layout_marginBottom="24dp"
+        android:textColor="#ffffffff"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView4"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_marginBottom="24dp"
+        android:textColor="#ffffffff"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="28dp"
+        android:textColor="#ffffffff"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/estado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="36dp"
+        android:text="Sem Filtro"
+        android:textColor="#ffffffff" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/estado"
+        android:layout_alignBottom="@+id/estado"
+        android:layout_toRightOf="@+id/textView2"
+        android:textColor="#ffffffff"
+        android:text="Com Filtro" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textViewAccX"
+        android:layout_toRightOf="@+id/textView2"
+        android:textColor="#ffffffff"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textViewAccY"
+        android:layout_alignLeft="@+id/textView6"
+        android:textColor="#ffffffff"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textViewAccZ"
+        android:layout_alignBottom="@+id/textViewAccZ"
+        android:layout_toRightOf="@+id/textView2"
+        android:textColor="#ffffffff"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Estado" />
+
+    <Button
+        android:id="@+id/button3"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textView4"
+        android:text="Voltar" 
+        android:onClick="startActivityVoltar"/>
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView9"
+        android:layout_alignLeft="@+id/textViewAccZ"
+        android:onClick="onClickGravar"
+        android:text="Gravar Acc" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView4"
+        android:layout_toRightOf="@+id/button1"
+        android:onClick="onClickSalvar"
+        android:text="Salvar Acc" />
+
+</RelativeLayout>

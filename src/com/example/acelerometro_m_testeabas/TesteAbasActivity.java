@@ -20,53 +20,23 @@ import android.view.View;
 import android.widget.TextView;
 import net.trucomanx.pdsplibj.pdsdf.*;
 
-public class TesteAbasActivity extends ActionBarActivity implements SensorEventListener {
-
+public class TesteAbasActivity extends ActionBarActivity  {
 	
-	SensorManager sm;
-	Sensor acelerometro;
+	Double Ax2;
+	Double Ay2;
+	Double Az2;
 	
-	TextView accX=null;
-	TextView accY=null;
-	TextView accZ=null;
+	Double Hx2;
+	Double Hy2;
+	Double Hz2;
 	
-	TextView accHatX=null;
-	TextView accHatY=null;
-	TextView accHatZ=null;
+	Double Qx2;
+	Double Qy2;
+	Double Qz2;
 	
-	TextView X=null;
-	TextView Y=null;
-	TextView Z=null;
-	
-	TextView Estado=null;
-	
-	boolean gravaAcc = false;
-	
-	Double Ax=0.5;
-	Double Ay=0.5;
-	Double Az=0.5;
-	
-	Double Hx=1.0;
-	Double Hy=1.0;
-	Double Hz=1.0;
-	
-	Double Qx=1.0;
-	Double Qy=1.0;
-	Double Qz=1.0;
-	
-	Double Rx=2.0;
-	Double Ry=2.0;
-	Double Rz=2.0;
-	
-	ArrayList<Double> AccSalvas;
-	
-	DecimalFormat decimal = new DecimalFormat( "0.###" );
-	
-	
-	
-	PdsKalman1D fx = new PdsKalman1D (Ax,Hx,Qx,Rx);
-	PdsKalman1D fy = new PdsKalman1D (Ay,Hy,Qy,Ry);
-	PdsKalman1D fz = new PdsKalman1D (Az,Hz,Qz,Rz);
+	Double Rx2;
+	Double Ry2;
+	Double Rz2;
 	
 	
 	@Override
@@ -74,129 +44,116 @@ public class TesteAbasActivity extends ActionBarActivity implements SensorEventL
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_teste_abas);
 		
-		sm = (SensorManager)getSystemService(Context.SENSOR_SERVICE); // Acessando os sensores
-		acelerometro = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);// Acessando o acelerometro
+	Intent intent = getIntent();
 		
-		Estado = (TextView) findViewById(R.id.textView9);
-		
-		accX = (TextView) findViewById(R.id.textViewAccX);
-		accY = (TextView) findViewById(R.id.textViewAccY);
-		accZ = (TextView) findViewById(R.id.textViewAccZ);
-		
-		accHatX = (TextView) findViewById(R.id.textView6);
-		accHatY = (TextView) findViewById(R.id.textView7);
-		accHatZ = (TextView) findViewById(R.id.textView8);
-		
-		
-		X = (TextView) findViewById(R.id.textView2);
-		Y = (TextView) findViewById(R.id.textView3);
-		Z = (TextView) findViewById(R.id.textView4);
-	
-		Intent intent = getIntent();
-		
-		Hx = intent.getDoubleExtra("HX", 1.0);
-		Hy = intent.getDoubleExtra("HY", 1.0);
-		Hz = intent.getDoubleExtra("HZ", 1.0);
-		Rx = intent.getDoubleExtra("RX", 2.0);
-		Ry = intent.getDoubleExtra("RY", 2.0);
-		Rz = intent.getDoubleExtra("RZ", 2.0);
-		Ax = intent.getDoubleExtra("AX", 0.5);
-		Ay = intent.getDoubleExtra("AY", 0.5);
-		Az = intent.getDoubleExtra("AZ", 0.5);
-		Qx = intent.getDoubleExtra("QX", 1.0);
-		Qy = intent.getDoubleExtra("QY", 1.0);
-		Qz = intent.getDoubleExtra("QZ", 1.0);
-		
-		 String hx = decimal.format(Hx);
-		 String hy = decimal.format(Hy);
-		 String hz = decimal.format(Hz);
-		 
-		 String rx = decimal.format(Rx);
-		 String ry = decimal.format(Ry);
-		 String rz = decimal.format(Rz);
-		 
-		 String ax = decimal.format(Ax);
-		 String ay = decimal.format(Ay);
-		 String az = decimal.format(Az);
-		 
-		 String qx = decimal.format(Qx);
-		 String qy = decimal.format(Qy);
-		 String qz = decimal.format(Qz);
-		
-
+		Hx2 = intent.getDoubleExtra("HX", 1.0);
+		Hy2 = intent.getDoubleExtra("HY", 1.0);
+		Hz2 = intent.getDoubleExtra("HZ", 1.0);
+		Rx2 = intent.getDoubleExtra("RX", 2.0);
+		Ry2 = intent.getDoubleExtra("RY", 2.0);
+		Rz2 = intent.getDoubleExtra("RZ", 2.0);
+		Ax2 = intent.getDoubleExtra("AX", 0.5);
+		Ay2 = intent.getDoubleExtra("AY", 0.5);
+		Az2 = intent.getDoubleExtra("AZ", 0.5);
+		Qx2 = intent.getDoubleExtra("QX", 1.0);
+		Qy2 = intent.getDoubleExtra("QY", 1.0);
+		Qz2 = intent.getDoubleExtra("QZ", 1.0);
 		
 		
-	    X.setText("Hx: "+ hx + "Rx: " + rx + "Ax: " + ax + "Qx: " + qx );
-	    Y.setText("Hy: "+ hy + "Ry: " + ry + "Ay: " + ay + "Qy: " + qy );
-	    Z.setText("Hz: "+ hz + "Rz: " + rz + "Az: " + az + "Qz: " + qz );
 		
-	
-	    AccSalvas = new ArrayList<Double>();
 	}
 	
+	
+	
+	public void startActivityAceleracao(View view) {
+		Intent Aceleracao = new Intent(this, ActivityAceleracao.class); // Mudança de telas
+		
+		 	Aceleracao.putExtra("HX2", Hx2);
+		 	Aceleracao.putExtra("HY2", Hy2);
+		 	Aceleracao.putExtra("HZ2", Hz2);
+		 	Aceleracao.putExtra("RX2", Rx2);
+		 	Aceleracao.putExtra("RY2", Ry2);
+		 	Aceleracao.putExtra("RZ2", Rz2);
+		 	Aceleracao.putExtra("AX2", Ax2);
+		 	Aceleracao.putExtra("AY2", Ay2);
+		 	Aceleracao.putExtra("AZ2", Az2);
+		 	Aceleracao.putExtra("QX2", Qx2);
+		 	Aceleracao.putExtra("QY2", Qy2);
+		 	Aceleracao.putExtra("QZ2", Qz2);
+		
+		startActivity(Aceleracao);
+				 
+		
+	}
 	
 	public void startActivityVelocidade(View view) {
 		 
 	    Intent Velocidade = new Intent(this, ActivityVelocidade.class); // Mudança de telas
+	    
+		Velocidade.putExtra("HX3", Hx2);
+		Velocidade.putExtra("HY3", Hy2);
+		Velocidade.putExtra("HZ3", Hz2);
+		Velocidade.putExtra("RX3", Rx2);
+		Velocidade.putExtra("RY3", Ry2);
+		Velocidade.putExtra("RZ3", Rz2);
+		Velocidade.putExtra("AX3", Ax2);
+		Velocidade.putExtra("AY3", Ay2);
+		Velocidade.putExtra("AZ3", Az2);
+		Velocidade.putExtra("QX3", Qx2);
+		Velocidade.putExtra("QY3", Qy2);
+		Velocidade.putExtra("QZ3", Qz2);
+	    
 	    startActivity(Velocidade);
+	}
+	
+	public void startActivityDeslocamento(View view) {
+		 
+	    Intent Deslocamento = new Intent(this, ActivityDeslocamento.class); // Mudança de telas
+	    
+		Deslocamento.putExtra("HX4", Hx2);
+		Deslocamento.putExtra("HY4", Hy2);
+		Deslocamento.putExtra("HZ4", Hz2);
+		Deslocamento.putExtra("RX4", Rx2);
+		Deslocamento.putExtra("RY4", Ry2);
+		Deslocamento.putExtra("RZ4", Rz2);
+		Deslocamento.putExtra("AX4", Ax2);
+		Deslocamento.putExtra("AY4", Ay2);
+		Deslocamento.putExtra("AZ4", Az2);
+		Deslocamento.putExtra("QX4", Qx2);
+		Deslocamento.putExtra("QY4", Qy2);
+		Deslocamento.putExtra("QZ4", Qz2);
+	    
+	    startActivity(Deslocamento);
+	}
+	
+	public void startActivitySalvarTudo(View view) {
+		 
+	    Intent Salvar = new Intent(this, ActivitySalvarDados.class); // Mudança de telas
+	    
+	    Salvar.putExtra("HX5", Hx2);
+	    Salvar.putExtra("HY5", Hy2);
+	    Salvar.putExtra("HZ5", Hz2);
+	    Salvar.putExtra("RX5", Rx2);
+	    Salvar.putExtra("RY5", Ry2);
+	    Salvar.putExtra("RZ5", Rz2);
+	    Salvar.putExtra("AX5", Ax2);
+	    Salvar.putExtra("AY5", Ay2);
+	    Salvar.putExtra("AZ5", Az2);
+	    Salvar.putExtra("QX5", Qx2);
+	    Salvar.putExtra("QY5", Qy2);
+	    Salvar.putExtra("QZ5", Qz2);
+	    
+	    startActivity(Salvar);
+	}
+	
+	public void startActivityConfiguracao(View view) {
+		 
+	    Intent Configurar = new Intent(this, ActivityConfiguracao.class); // Mudança de telas
+	    startActivity(Configurar);
 	}
 		
 	 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		sm.registerListener(this, acelerometro, SensorManager.SENSOR_DELAY_NORMAL); // Inicia o processo de captura do acelerometro
-
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		sm.unregisterListener(this); // Irá parar o processo de captura do sensor
-	}                                // Estes métodos(onResume/onPause)fazem poupar bateria, pois sem eles o aplicativo vai continuar  
-	// captando informações mesmo que o usuário não esteja interagindo
-
 	
-	private void salvarAceleracoes() {
-    	String filename = "aceleracoes_com_filtro.txt";
-
-    	FileOutputStream outputStream;
-    	String entrada = new String();
-    	int ii=0;
-    	for (Double d : AccSalvas) {
-    		if(ii==3) ii=0;
-    		entrada = entrada.concat(d.toString());
-    		if(ii!=2) entrada = entrada.concat("\t");
-    		else     entrada = entrada.concat("\n");
-    		ii++;
-    	}
-    	
-    	File file = new File("/storage/emulated/0", filename);
-
-    	try {
-    	  outputStream = new FileOutputStream(file);
-    	  outputStream.write(entrada.getBytes());
-    	  outputStream.close();  
-    	} catch (Exception e) {
-    	  e.printStackTrace();
-    	}
-    }
-	
-	public void onClickGravar(View v){
-	       
-	   	Estado.setText("Gravando Acc");
-    	gravaAcc = true;
-		
-	    }
-	
-	public void onClickSalvar(View v){
-	       
-    	salvarAceleracoes();
-    	gravaAcc = false;
-    	Estado.setText("Salvo");
-		
-	    }
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -216,51 +173,5 @@ public class TesteAbasActivity extends ActionBarActivity implements SensorEventL
 		return super.onOptionsItemSelected(item);
 	}
 
-	@Override
-	public void onSensorChanged(SensorEvent event) {
-		
-		double ax = (event.values[0]);
-		double ay = (event.values[1]);
-		double az = (event.values[2]-9.78);
-		
-		 String AX = decimal.format(ax);
-		 String AY = decimal.format(ay);
-		 String AZ = decimal.format(az);
-		
-		accX.setText("x:"+(AX));
-		accY.setText("y:"+(AY));
-		accZ.setText("z:"+(AZ));
-		
-		//--------------------------------------------------------
-		
-		double hatax = fx.EvaluateValue(ax);
-		double hatay = fy.EvaluateValue(ay);
-		double hataz = fz.EvaluateValue(az);
-		
-		 String Hatax = decimal.format(hatax);
-		 String Hatay = decimal.format(hatay);
-		 String Hataz = decimal.format(hataz);
-		 
-		 if (gravaAcc) {
-				AccSalvas.add(hatax);
-				AccSalvas.add(hatay);
-				AccSalvas.add(hataz);
-			}
-			
-		 
-		 accHatX.setText("x:"+(Hatax));
-		 accHatY.setText("y:"+(Hatay));
-		 accHatZ.setText("z:"+(Hataz));
-		
-		
-		
-		}
 	
-	
-	
-	@Override
-	public void onAccuracyChanged(Sensor sensor, int accuracy) {
-		// TODO Auto-generated method stub
-		
-	}
 }

@@ -8,5 +8,8 @@
     <string name="title_activity_activity_deslocamento">ActivityDeslocamento</string>
     <string name="title_activity_activity_salvar_dados">Salvar_Dados</string>
     <string name="title_activity_activity_configuracao">Configuração</string>
+    <string name="title_activity_aceleracoes">Acelerações</string>
+    <string name="title_activity_activity_desloca">Deslocamento</string>
+    <string name="title_activity_activity_aceleracao">Aceleração</string>
 
 </resources>

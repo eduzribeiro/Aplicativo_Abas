@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ff6eb6ff"
-    android:onClick="startActivityConfiguracao"
     android:paddingBottom="4dp"
     android:paddingLeft="4dp"
     android:paddingRight="4dp"
@@ -22,26 +21,6 @@
         android:textColor="#ffffffff"
         android:textSize="@dimen/abc_text_size_display_1_material" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="17dp"
-        android:onClick="onClickSalvar"
-        android:text="Salvar Dados" />
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="132dp"
-        android:onClick="onClickGravar"
-        android:text="Gravar Dados" />
-
     <TextView
         android:id="@+id/estado"
         android:layout_width="wrap_content"
@@ -50,5 +29,36 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="37dp"
         android:text="Estado" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/button2"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="82dp"
+        android:onClick="onClickGravar"
+        android:text="Gravar Dados" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:onClick="onClickSalvar"
+        android:text="Salvar Dados" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button2"
+        android:layout_alignRight="@+id/button2"
+        android:layout_below="@+id/button2"
+        android:layout_marginTop="16dp"
+        android:text="Voltar" 
+        android:onClick="startActivityVoltar"/>
 
 </RelativeLayout>

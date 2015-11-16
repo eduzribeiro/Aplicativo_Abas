@@ -9,7 +9,7 @@
     android:paddingBottom="4dp"
     tools:context=".MainActivity"
     android:background="#ff6eb6ff"
-    android:onClick="startActivitySalvamento">
+    >
 
     <TextView
         android:id="@+id/textView"
@@ -54,24 +54,24 @@
         android:textColor="#ffffffff" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/button1"
-        android:layout_marginBottom="70dp"
-        android:onClick="onClickSalvar"
-        android:text="Salvar Deslocamento" />
-
-    <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button2"
+        android:layout_below="@+id/textViewPosz"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"
+        android:layout_marginTop="57dp"
         android:onClick="onClickGravar"
         android:text="Gravar Deslocamento" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/button1"
+        android:layout_below="@+id/button1"
+        android:layout_marginTop="26dp"
+        android:onClick="onClickSalvar"
+        android:text="Salvar Deslocamento" />
 
     <TextView
         android:id="@+id/estado"
@@ -79,7 +79,18 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="39dp"
         android:text="Estado" />
+
+    <Button
+        android:id="@+id/button3"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/estado"
+        android:layout_alignLeft="@+id/button2"
+        android:layout_alignRight="@+id/button2"
+        android:layout_marginBottom="16dp"
+        android:text="Voltar" 
+        android:onClick="startActivityVoltar"/>
 
 </RelativeLayout>

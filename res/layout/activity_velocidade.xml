@@ -9,7 +9,7 @@
     android:paddingBottom="4dp"
     tools:context=".MainActivity"
     android:background="#ff6eb6ff"
-    android:onClick="startActivityDeslocamento">
+    >
 
     <TextView
         android:id="@+id/textView"
@@ -21,16 +21,6 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffffffff"
         android:textSize="@dimen/abc_text_size_display_1_material" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button1"
-        android:layout_alignBottom="@+id/button1"
-        android:layout_alignRight="@+id/textView"
-        android:onClick="onClickSalvar"
-        android:text="Salvar Vel" />
 
     <TextView
         android:id="@+id/textViewPosx"
@@ -64,14 +54,14 @@
         android:textColor="#ffffffff" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textViewPosz"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="68dp"
-        android:onClick="onClickGravar"
-        android:text="Gravar Vel" />
+        android:layout_alignBaseline="@+id/button1"
+        android:layout_alignBottom="@+id/button1"
+        android:layout_toRightOf="@+id/estado"
+        android:onClick="onClickSalvar"
+        android:text="Salvar Vel" />
 
     <TextView
         android:id="@+id/estado"
@@ -79,7 +69,27 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="22dp"
+        android:layout_marginBottom="91dp"
         android:text="Estado" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/estado"
+        android:layout_alignLeft="@+id/textViewPosz"
+        android:layout_marginBottom="28dp"
+        android:onClick="onClickGravar"
+        android:text="Gravar Vel" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="19dp"
+        android:text="Voltar" 
+        android:onClick="startActivityVoltar"/>
 
 </RelativeLayout>

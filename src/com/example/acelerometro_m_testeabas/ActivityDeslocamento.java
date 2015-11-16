@@ -22,8 +22,11 @@ import android.widget.TextView;
 public class ActivityDeslocamento extends ActionBarActivity implements SensorEventListener {
 
 
-	private long last_timeAcel=0;		
-	private long current_timeAcel=0;
+	//private long last_timeAcel=0;		
+	//private long current_timeAcel=0;
+	
+	private double current_timeAcel=0;
+	private double tns;
 	
 	SensorManager sm;
 	Sensor acelerometro;
@@ -69,6 +72,13 @@ public class ActivityDeslocamento extends ActionBarActivity implements SensorEve
 	PdsKalman1D fy = new PdsKalman1D (Ay,Hy,Qy,Ry);
 	PdsKalman1D fz = new PdsKalman1D (Az,Hz,Qz,Rz);
 	
+	Integral Int1=new Integral();
+	Integral Int2=new Integral();
+	Integral Int3=new Integral();
+	Integral Int4=new Integral();
+	Integral Int5=new Integral();
+	Integral Int6=new Integral();
+	
 		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +86,7 @@ public class ActivityDeslocamento extends ActionBarActivity implements SensorEve
 		setContentView(R.layout.activity_deslocamento);
 	
 		sm = (SensorManager)getSystemService(Context.SENSOR_SERVICE); // Acessando os sensores
-		acelerometro = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);// Acessando o acelerometro 
+		acelerometro = sm.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);// Acessando o acelerometro 
 
 		Estado = (TextView) findViewById(R.id.estado);
 		
@@ -87,28 +97,42 @@ public class ActivityDeslocamento extends ActionBarActivity implements SensorEve
 		
 	Intent intent = getIntent();
 		
-		Hx = intent.getDoubleExtra("HX", 1.0);
-		Hy = intent.getDoubleExtra("HY", 1.0);
-		Hz = intent.getDoubleExtra("HZ", 1.0);
-		Rx = intent.getDoubleExtra("RX", 2.0);
-		Ry = intent.getDoubleExtra("RY", 2.0);
-		Rz = intent.getDoubleExtra("RZ", 2.0);
-		Ax = intent.getDoubleExtra("AX", 0.5);
-		Ay = intent.getDoubleExtra("AY", 0.5);
-		Az = intent.getDoubleExtra("AZ", 0.5);
-		Qx = intent.getDoubleExtra("QX", 1.0);
-		Qy = intent.getDoubleExtra("QY", 1.0);
-		Qz = intent.getDoubleExtra("QZ", 1.0);
+		Hx = intent.getDoubleExtra("HX4", 1.0);
+		Hy = intent.getDoubleExtra("HY4", 1.0);
+		Hz = intent.getDoubleExtra("HZ4", 1.0);
+		Rx = intent.getDoubleExtra("RX4", 2.0);
+		Ry = intent.getDoubleExtra("RY4", 2.0);
+		Rz = intent.getDoubleExtra("RZ4", 2.0);
+		Ax = intent.getDoubleExtra("AX4", 0.5);
+		Ay = intent.getDoubleExtra("AY4", 0.5);
+		Az = intent.getDoubleExtra("AZ4", 0.5);
+		Qx = intent.getDoubleExtra("QX4", 1.0);
+		Qy = intent.getDoubleExtra("QY4", 1.0);
+		Qz = intent.getDoubleExtra("QZ4", 1.0);
 	
 		DeslocSalvo = new ArrayList<Double>();	
 		
 	}
 
 	
-	public void startActivitySalvamento(View view) {
+	public void startActivityVoltar(View view) {
 		 
-	    Intent Salvamento = new Intent(this, ActivitySalvarDados.class);
-	    startActivity(Salvamento);
+	    Intent Menu = new Intent(this, TesteAbasActivity.class);
+	    
+	    Menu.putExtra("HX", Hx);
+	    Menu.putExtra("HY", Hy);
+	    Menu.putExtra("HZ", Hz);
+	    Menu.putExtra("RX", Rx);
+	    Menu.putExtra("RY", Ry);
+	    Menu.putExtra("RZ", Rz);
+	    Menu.putExtra("AX", Ax);
+	    Menu.putExtra("AY", Ay);
+	    Menu.putExtra("AZ", Az);
+	    Menu.putExtra("QX", Qx);
+	    Menu.putExtra("QY", Qy);
+	    Menu.putExtra("QZ", Qz);
+	    
+	    startActivity(Menu);
 	}
 	
 
@@ -193,16 +217,37 @@ public class ActivityDeslocamento extends ActionBarActivity implements SensorEve
 		
 		double ax = (event.values[0]);
 		double ay = (event.values[1]);
-		double az = (event.values[2]-9.78);
+		double az = (event.values[2]);
 	
 		double hatax = fx.EvaluateValue(ax);
 		double hatay = fy.EvaluateValue(ay);
 		double hataz = fz.EvaluateValue(az);
 	
+		if(current_timeAcel==0) this.current_timeAcel=event.timestamp; //The time in nanosecond at which the event happened	    
+		
+		tns = (event.timestamp-current_timeAcel)/1000000000.0;
+		
+		Vx = Int1   .EvaluateValue(hatax,tns);
+		Vy = Int2   .EvaluateValue(hatay,tns);
+		Vz = Int3   .EvaluateValue(hataz,tns);
+		
+		Sx = Int4   .EvaluateValue(Vx,tns);
+		Sy = Int5   .EvaluateValue(Vy,tns);
+		Sz = Int6   .EvaluateValue(Vz,tns);
+		
+		String SX = decimal.format(Sx);
+		String SY = decimal.format(Sy);
+		String SZ = decimal.format(Sz);
+		
+		
+		Posx.setText("x: "+(SX));
+		Posy.setText("y: "+(SY));
+		Posz.setText("z: "+(SZ));
+		
 		
 		//--------------------------------------------------------------------- INTEGRAIS SIMPLES
 		
-				double VxBk=0;
+			/*	double VxBk=0;
 				double VyBk=0;
 				double VzBk=0;
 				double SxBk=0;
@@ -243,7 +288,7 @@ public class ActivityDeslocamento extends ActionBarActivity implements SensorEve
 				
 							
 				this.last_timeAcel=this.current_timeAcel;
-				
+				*/
 				
 				 if (gravaDesloc) {
 						DeslocSalvo.add(Sx);

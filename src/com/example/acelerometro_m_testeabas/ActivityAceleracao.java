@@ -1,7 +1,5 @@
 package com.example.acelerometro_m_testeabas;
 
-
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.DecimalFormat;
@@ -20,27 +18,30 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import net.trucomanx.pdsplibj.pdsdf.*;
 
-public class ActivityVelocidade extends ActionBarActivity implements SensorEventListener {
+public class ActivityAceleracao extends ActionBarActivity implements SensorEventListener {
 
-	//private long last_timeAcel=0;		
-	//private long current_timeAcel=0;
-	
-	private double current_timeAcel=0;
-	private double tns;
 	
 	SensorManager sm;
 	Sensor acelerometro;
 	
+	TextView accX=null;
+	TextView accY=null;
+	TextView accZ=null;
 	
-	TextView Velx = null;
-	TextView Vely = null;
-	TextView Velz = null;
+	TextView accHatX=null;
+	TextView accHatY=null;
+	TextView accHatZ=null;
+	
+	TextView X=null;
+	TextView Y=null;
+	TextView Z=null;
 	
 	TextView Estado=null;
 	
-	boolean gravaVel = false;
-
+	boolean gravaAcc = false;
+	
 	Double Ax=0.5;
 	Double Ay=0.5;
 	Double Az=0.5;
@@ -57,63 +58,89 @@ public class ActivityVelocidade extends ActionBarActivity implements SensorEvent
 	Double Ry=2.0;
 	Double Rz=2.0;
 	
-	double Vx = 0;
-	double Vy = 0;
-	double Vz = 0;
-	
-	ArrayList<Double> VelSalvas;
+	ArrayList<Double> AccSalvas;
 	
 	DecimalFormat decimal = new DecimalFormat( "0.###" );
 	
-
+	
+	
 	PdsKalman1D fx = new PdsKalman1D (Ax,Hx,Qx,Rx);
 	PdsKalman1D fy = new PdsKalman1D (Ay,Hy,Qy,Ry);
 	PdsKalman1D fz = new PdsKalman1D (Az,Hz,Qz,Rz);
-	
-	Integral Int1=new Integral();
-	Integral Int2=new Integral();
-	Integral Int3=new Integral();
 	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_velocidade);
+		setContentView(R.layout.activity_aceleracao);
 		
 		sm = (SensorManager)getSystemService(Context.SENSOR_SERVICE); // Acessando os sensores
 		acelerometro = sm.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);// Acessando o acelerometro
 		
-		Estado = (TextView) findViewById(R.id.estado);
-			
-		Velx = (TextView) findViewById(R.id.textViewPosx);
-		Vely = (TextView) findViewById(R.id.textViewPosy);
-		Velz = (TextView) findViewById(R.id.textViewPosz);
+		Estado = (TextView) findViewById(R.id.textView9);
+		
+		accX = (TextView) findViewById(R.id.textViewAccX);
+		accY = (TextView) findViewById(R.id.textViewAccY);
+		accZ = (TextView) findViewById(R.id.textViewAccZ);
+		
+		accHatX = (TextView) findViewById(R.id.textView6);
+		accHatY = (TextView) findViewById(R.id.textView7);
+		accHatZ = (TextView) findViewById(R.id.textView8);
 		
 		
-	    Intent intent = getIntent();
+		X = (TextView) findViewById(R.id.textView2);
+		Y = (TextView) findViewById(R.id.textView3);
+		Z = (TextView) findViewById(R.id.textView4);
+	
+		Intent intent = getIntent();
 		
-		Hx = intent.getDoubleExtra("HX3", 1.0);
-		Hy = intent.getDoubleExtra("HY3", 1.0);
-		Hz = intent.getDoubleExtra("HZ3", 1.0);
-		Rx = intent.getDoubleExtra("RX3", 2.0);
-		Ry = intent.getDoubleExtra("RY3", 2.0);
-		Rz = intent.getDoubleExtra("RZ3", 2.0);
-		Ax = intent.getDoubleExtra("AX3", 0.5);
-		Ay = intent.getDoubleExtra("AY3", 0.5);
-		Az = intent.getDoubleExtra("AZ3", 0.5);
-		Qx = intent.getDoubleExtra("QX3", 1.0);
-		Qy = intent.getDoubleExtra("QY3", 1.0);
-		Qz = intent.getDoubleExtra("QZ3", 1.0);
+		Hx = intent.getDoubleExtra("HX2", 1.0);
+		Hy = intent.getDoubleExtra("HY2", 1.0);
+		Hz = intent.getDoubleExtra("HZ2", 1.0);
+		Rx = intent.getDoubleExtra("RX2", 2.0);
+		Ry = intent.getDoubleExtra("RY2", 2.0);
+		Rz = intent.getDoubleExtra("RZ2", 2.0);
+		Ax = intent.getDoubleExtra("AX2", 0.5);
+		Ay = intent.getDoubleExtra("AY2", 0.5);
+		Az = intent.getDoubleExtra("AZ2", 0.5);
+		Qx = intent.getDoubleExtra("QX2", 1.0);
+		Qy = intent.getDoubleExtra("QY2", 1.0);
+		Qz = intent.getDoubleExtra("QZ2", 1.0);
 		
+		 String hx = decimal.format(Hx);
+		 String hy = decimal.format(Hy);
+		 String hz = decimal.format(Hz);
+		 
+		 String rx = decimal.format(Rx);
+		 String ry = decimal.format(Ry);
+		 String rz = decimal.format(Rz);
+		 
+		 String ax = decimal.format(Ax);
+		 String ay = decimal.format(Ay);
+		 String az = decimal.format(Az);
+		 
+		 String qx = decimal.format(Qx);
+		 String qy = decimal.format(Qy);
+		 String qz = decimal.format(Qz);	
 		
-		VelSalvas = new ArrayList<Double>();
+		 
+		try {
+		    X.setText("Hx: "+ hx + "Rx: " + rx + "Ax: " + ax + "Qx: " + qx );
+		    Y.setText("Hy: "+ hy + "Ry: " + ry + "Ay: " + ay + "Qy: " + qy );
+		    Z.setText("Hz: "+ hz + "Rz: " + rz + "Az: " + az + "Qz: " + qz );
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 		
+	
+	    AccSalvas = new ArrayList<Double>();
 	}
 	
 	
 	public void startActivityVoltar(View view) {
 		 
-	    Intent Menu = new Intent(this, TesteAbasActivity.class);
+	    Intent Menu = new Intent(this, TesteAbasActivity.class); // Mudança de telas
 	    
 	    Menu.putExtra("HX", Hx);
 	    Menu.putExtra("HY", Hy);
@@ -130,9 +157,8 @@ public class ActivityVelocidade extends ActionBarActivity implements SensorEvent
 	    
 	    startActivity(Menu);
 	}
-	
-
-	
+		
+	 
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -148,13 +174,13 @@ public class ActivityVelocidade extends ActionBarActivity implements SensorEvent
 	// captando informações mesmo que o usuário não esteja interagindo
 
 	
-	private void salvarVelocidades() {
-    	String filename = "velocidades.txt";
+	private void salvarAceleracoes() {
+    	String filename = "aceleracoes_com_filtro.txt";
 
     	FileOutputStream outputStream;
     	String entrada = new String();
     	int ii=0;
-    	for (Double d : VelSalvas) {
+    	for (Double d : AccSalvas) {
     		if(ii==3) ii=0;
     		entrada = entrada.concat(d.toString());
     		if(ii!=2) entrada = entrada.concat("\t");
@@ -172,27 +198,26 @@ public class ActivityVelocidade extends ActionBarActivity implements SensorEvent
     	  e.printStackTrace();
     	}
     }
-
+	
 	public void onClickGravar(View v){
 	       
-	   	Estado.setText("Gravando Vel");
-    	gravaVel = true;
+	   	Estado.setText("Gravando Acc");
+    	gravaAcc = true;
 		
 	    }
 	
 	public void onClickSalvar(View v){
 	       
-    	salvarVelocidades();
-    	gravaVel = false;
+    	salvarAceleracoes();
+    	gravaAcc = false;
     	Estado.setText("Salvo");
 		
 	    }
-	
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_velocidade, menu);
+		getMenuInflater().inflate(R.menu.teste_abas, menu);
 		return true;
 	}
 
@@ -208,79 +233,51 @@ public class ActivityVelocidade extends ActionBarActivity implements SensorEvent
 		return super.onOptionsItemSelected(item);
 	}
 
-
 	@Override
 	public void onSensorChanged(SensorEvent event) {
-
+		
 		double ax = (event.values[0]);
 		double ay = (event.values[1]);
 		double az = (event.values[2]);
+		
+		 String AX = decimal.format(ax);
+		 String AY = decimal.format(ay);
+		 String AZ = decimal.format(az);
+		
+		accX.setText("x:"+(AX));
+		accY.setText("y:"+(AY));
+		accZ.setText("z:"+(AZ));
+		
+		//--------------------------------------------------------
 		
 		double hatax = fx.EvaluateValue(ax);
 		double hatay = fy.EvaluateValue(ay);
 		double hataz = fz.EvaluateValue(az);
 		
-		if(current_timeAcel==0) this.current_timeAcel=event.timestamp; //The time in nanosecond at which the event happened	    
-		
-		tns = (event.timestamp-current_timeAcel)/1000000000.0;
-		
-		
-		Vx = Int1   .EvaluateValue(hatax,tns);
-		Vy = Int2   .EvaluateValue(hatay,tns);
-		Vz = Int3   .EvaluateValue(hataz,tns);
-		
-		 String VX = decimal.format(Vx);
-		 String VY = decimal.format(Vy);
-		 String VZ = decimal.format(Vz);
+		 String Hatax = decimal.format(hatax);
+		 String Hatay = decimal.format(hatay);
+		 String Hataz = decimal.format(hataz);
 		 
-		 Velx.setText("x:"+(VX));
-		 Vely.setText("y:"+(VY));
-		 Velz.setText("z:"+(VZ));
-		
-	/*	double VxBk=0;
-		double VyBk=0;
-		double VzBk=0;
-					
-		VxBk = Vx;
-		VyBk = Vy;
-		VzBk = Vz;
-		
-		//----------------------------------------- VELOCIDADE
-		
-		
-		this.current_timeAcel=event.timestamp;	
-		if(this.last_timeAcel==0)	this.last_timeAcel=this.current_timeAcel; 
-		
-		Vx = VxBk + hatax*(this.current_timeAcel-this.last_timeAcel)/1000000000.0;
-		Vy = VyBk + hatay*(this.current_timeAcel-this.last_timeAcel)/1000000000.0;
-		Vz = VzBk + hataz*(this.current_timeAcel-this.last_timeAcel)/1000000000.0;
-		
-		
-		 String VX = decimal.format(Vx);
-		 String VY = decimal.format(Vy);
-		 String VZ = decimal.format(Vz);
-		
-		
-		Velx.setText("x:"+(VX));
-		Vely.setText("y:"+(VY));
-		Velz.setText("z:"+(VZ));
-		
-		this.last_timeAcel=this.current_timeAcel;
-		*/
-		
-		 if (gravaVel) {
-				VelSalvas.add(Vx);
-				VelSalvas.add(Vy);
-				VelSalvas.add(Vz);
+		 if (gravaAcc) {
+				AccSalvas.add(hatax);
+				AccSalvas.add(hatay);
+				AccSalvas.add(hataz);
 			}
+			
+		 
+		 accHatX.setText("x:"+(Hatax));
+		 accHatY.setText("y:"+(Hatay));
+		 accHatZ.setText("z:"+(Hataz));
 		
-	}
-
-
+		
+		
+		}
+	
+	
+	
 	@Override
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 		// TODO Auto-generated method stub
 		
 	}
-
 }

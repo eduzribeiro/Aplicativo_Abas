@@ -37,7 +37,7 @@ public class ActivityConfiguracao extends ActionBarActivity implements SensorEve
     double Hy=1.0,Ry=2.0,Ay=0.5,Qy=1.0;
     double Hz=1.0,Rz=2.0,Az=0.5,Qz=1.0;
     
-    int N = 250;
+    int N = 50;
     int contRepouso=0;
     int contAtividade=0;
     
@@ -64,7 +64,7 @@ public class ActivityConfiguracao extends ActionBarActivity implements SensorEve
 		setContentView(R.layout.activity_configuracao);
 		
 		sm = (SensorManager)getSystemService(Context.SENSOR_SERVICE); // Acessando os sensores
-		acelerometro = sm.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);// Acessando o acelerometro 
+		acelerometro = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);// Acessando o acelerometro 
 		
 		titulo = (TextView) findViewById(R.id.estado);
 		Valoresx = (TextView) findViewById(R.id.textView4);
@@ -124,24 +124,24 @@ public class ActivityConfiguracao extends ActionBarActivity implements SensorEve
 	}
 
 	
-	public void startActivityAceleracao(View view) {
+	public void startActivityVoltar(View view) {
 		 
-	    Intent Aceleracao = new Intent(this, TesteAbasActivity.class);
+	    Intent Menu = new Intent(this, TesteAbasActivity.class);
 	    
-	    Aceleracao.putExtra("HX", Hx);
-	    Aceleracao.putExtra("HY", Hy);
-	    Aceleracao.putExtra("HZ", Hz);
-	    Aceleracao.putExtra("RX", Rx);
-	    Aceleracao.putExtra("RY", Ry);
-	    Aceleracao.putExtra("RZ", Rz);
-	    Aceleracao.putExtra("AX", Ax);
-	    Aceleracao.putExtra("AY", Ay);
-	    Aceleracao.putExtra("AZ", Az);
-	    Aceleracao.putExtra("QX", Qx);
-	    Aceleracao.putExtra("QY", Qy);
-	    Aceleracao.putExtra("QZ", Qz);
+	    Menu.putExtra("HX", Hx);
+	    Menu.putExtra("HY", Hy);
+	    Menu.putExtra("HZ", Hz);
+	    Menu.putExtra("RX", Rx);
+	    Menu.putExtra("RY", Ry);
+	    Menu.putExtra("RZ", Rz);
+	    Menu.putExtra("AX", Ax);
+	    Menu.putExtra("AY", Ay);
+	    Menu.putExtra("AZ", Az);
+	    Menu.putExtra("QX", Qx);
+	    Menu.putExtra("QY", Qy);
+	    Menu.putExtra("QZ", Qz);
 	    
-	    startActivity(Aceleracao);
+	    startActivity(Menu);
 	}
 	
 	public void onClickRepouso(View v){

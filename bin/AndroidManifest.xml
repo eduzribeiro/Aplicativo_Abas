@@ -4,6 +4,8 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="21" />
@@ -54,6 +56,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.acelerometro_m_testeabas.TesteAbasActivity" />
         </activity>
+        <activity
+            android:name=".ActivityAceleracao"
+            android:label="@string/title_activity_activity_aceleracao"
+            android:parentActivityName=".TesteAbasActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.acelerometro_m_testeabas.TesteAbasActivity" />
+        </activity>
     </application>
 
 </manifest>
+
+
